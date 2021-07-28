@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:contacts_app/models/contacts.dart';
-import 'package:contacts_app/screens/create-contact.dart';
-import 'package:contacts_app/widgets/build-contacts.dart';
+import 'package:contacts_app/screens/create_contact.dart';
+import 'package:contacts_app/widgets/build_contacts.dart';
 
 class ContactList extends StatelessWidget {
   @override
@@ -27,7 +27,7 @@ class _ContactsState extends State<Contacts> {
     var contactData = context.read<ContactData>();
     contactData.resetContactBeingEdited();
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) => contactCreationPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ContactCreation()));
   }
 
   @override

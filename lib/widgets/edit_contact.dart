@@ -13,6 +13,31 @@ Widget editIndividualContact(Map contact, context) {
   var number = contact["number"];
   var email = contact["email"];
 
+  void _deleteContact() {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Delete Contact'),
+        content: const Text('Are you sure you want to delete this contact?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('No, go back'),
+          ),
+          TextButton(
+            onPressed: () {
+              var contactData = context.read<ContactData>();
+              contactData.deleteContact(contact);
+
+              Navigator.pop(context, 'Confirm');
+            },
+            child: const Text('Yes, delete'),
+          )
+        ]
+      )
+    );
+  }
+
   return Column(
     children: [
       Card(
@@ -79,7 +104,15 @@ Widget editIndividualContact(Map contact, context) {
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
                   var contactData = context.read<ContactData>();
-                  contactData.updateContact();
+                  bool areNamesEmpty = data.contactBeingEdited["firstName"].isEmpty && data.contactBeingEdited["lastName"].isEmpty;
+                  bool areContactsEmpty = data.contactBeingEdited["email"].isEmpty && data.contactBeingEdited["number"].isEmpty;
+
+                  if (areNamesEmpty && areContactsEmpty){
+                    _deleteContact();
+
+                  } else {
+                    contactData.updateContact();
+                  }
                 },
                 child: Padding(
                   padding: buttonPadding,
@@ -90,26 +123,7 @@ Widget editIndividualContact(Map contact, context) {
               ),
               Divider(height: 15.0,color: Colors.black),
               TextButton(
-                onPressed: () => showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Text('Delete Contact'),
-                    content: const Text('Are you sure you want to delete this contact?'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text('No, go back'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          var contactData = context.read<ContactData>();
-                          contactData.deleteContact(contact, context);
-                        },
-                        child: const Text('Yes, delete'),
-                      )
-                    ]
-                  )
-                ),
+                onPressed: () => _deleteContact(),
                 child: Padding(
                   padding: buttonPadding,
                   child: Text("Delete Contact",

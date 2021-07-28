@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:contacts_app/models/contacts.dart';
-import 'package:contacts_app/widgets/build-row.dart';
+import 'package:contacts_app/widgets/build_row.dart';
 
 // builds contacts list body
 Widget buildContacts() {

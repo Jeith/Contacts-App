@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:contacts_app/models/contacts.dart';
-import 'package:contacts_app/screens/individual-contact.dart';
-import 'package:contacts_app/widgets/individual-contact.dart';
+import 'package:contacts_app/screens/individual_contact.dart';
+import 'package:contacts_app/widgets/individual_contact.dart';
 
 Widget buildRow(Map contact) {
   final _boldFont = const TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold);
@@ -30,7 +30,7 @@ Widget buildRow(Map contact) {
           contactData.storeContactForEditing(contact);
           contactData.untoggleEditingInputs();
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => individualContactPage(contact, context)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => IndividualContact(contact: contact)));
         }
       )
     )

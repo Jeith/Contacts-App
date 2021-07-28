@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ContactData with ChangeNotifier {
-  // Declaring contact 
+  // Declaring contacts
   List contactList = [
     {
       "id": 3,
@@ -95,7 +95,6 @@ class ContactData with ChangeNotifier {
       "email": ""
     }
   ];
-  bool isCurrentlyEditingContact = false;
   Map contactBeingEdited = {
     'id': 0,
     'firstName': "",
@@ -103,6 +102,7 @@ class ContactData with ChangeNotifier {
     'number': "",
     'email': ""
   };
+  bool isCurrentlyEditingContact = false;
 
   // sorting contactList by first and last name
   void sortContacts() {
@@ -127,7 +127,7 @@ class ContactData with ChangeNotifier {
   }
 
   // filters out contact from contactList & dismisses dialog box
-  void deleteContact(Map contact, BuildContext context) {
+  void deleteContact(Map contact) {
     List filteredContacts = contactList.where((i) => i["id"] != contact["id"]).toList();
     contactList = filteredContacts;
 
@@ -136,22 +136,18 @@ class ContactData with ChangeNotifier {
     contactBeingEdited["emai"] = "";
     contactBeingEdited["number"] = "";
     
-    Navigator.of(context).pop();
     untoggleEditingInputs();
 
     notifyListeners();
   }
 
   // adds new contact to contactList
-  void addContact(BuildContext context) {
+  void addContact() {
     // sets id to current length of contactList and adds it to the list
     contactBeingEdited["id"] = contactList.length;
     contactList.add(contactBeingEdited);
 
     sortContacts();
-
-    // navigates back to the home of the contacts page
-    Navigator.pop(context);
 
     // resets contactBeingEdited
     contactBeingEdited = {

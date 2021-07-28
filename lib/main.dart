@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:contacts_app/models/contacts.dart';
-import 'package:contacts_app/screens/contact-list.dart';
+import 'package:contacts_app/screens/contact_list.dart';
 
 void main() {
   runApp(
